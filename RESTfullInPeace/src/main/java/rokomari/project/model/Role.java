@@ -1,13 +1,11 @@
 package rokomari.project.model;
 
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,17 +15,19 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "role_id")
-	private long id;
+	private long roleId;
 	
 	@Column(name = "name")
 	private String name;
-	@ManyToMany(mappedBy = "roles")
-	private Set<Users> users;
+	
+	
+	public Role() {
+	}
 	public long getId() {
-		return id;
+		return roleId;
 	}
 	public void setId(long id) {
-		this.id = id;
+		this.roleId = id;
 	}
 	public String getName() {
 		return name;
@@ -35,12 +35,7 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Set<Users> getUsers() {
-		return users;
-	}
-	public void setUsers(Set<Users> users) {
-		this.users = users;
-	}
+
 	
 	
 

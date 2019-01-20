@@ -1,4 +1,4 @@
-package rokomari.project.model.controllers;
+package rokomari.project.controllers;
 
 import java.util.List;
 
@@ -29,27 +29,28 @@ public class APIcontroller {
 	
 	@Autowired
 	DoctorDAO doctorDao;
+	//insert a doctor
 	
 	@PostMapping("/insert/doctor/new")
 	public Doctor insertDoctor(@Valid @RequestBody Doctor doctor) {
 		return doctorDao.save(doctor);
 	}
-	
+	//insert a patient
 	@PostMapping("/insert/patient/new")
 	public Patient insertPatient(@Valid @RequestBody Patient patient) {
 		return patientDao.save(patient);
 	}
-	
+	// get all doctors
 	@GetMapping("/doctors")
 	public List<Doctor> getAllDoctor(){
 		return doctorDao.getAllDoc();
 	}
-	
+	//get all patients
 	@GetMapping("/patients")
 	public List<Patient> getAllPatient(){
 		return patientDao.findAll();
 	}
-	
+	// get doctor by id
 	@GetMapping("/doctors/{id}")
 	public ResponseEntity<Doctor> getDoctorById(@PathVariable(value = "id") Long docid){
 		Doctor doc = doctorDao.findOne(docid);
@@ -59,7 +60,7 @@ public class APIcontroller {
 		
 		return ResponseEntity.ok().body(doc);
 	}
-	
+	// get patient by id
 	@GetMapping("/patients/{id}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable(value = "id") Long pntid){
 		Patient pnt = patientDao.findOne(pntid);
@@ -69,7 +70,7 @@ public class APIcontroller {
 		
 		return ResponseEntity.ok().body(pnt);
 	}
-	
+	// update doctor by id
 	@PutMapping("/update/doctors")
 	public ResponseEntity<Doctor> updateDoctor(@PathVariable(value = "id") Long docid, @Valid @RequestBody Doctor doc){
 		Doctor doctor = doctorDao.findOne(docid);
@@ -84,7 +85,7 @@ public class APIcontroller {
 		Doctor update = doctorDao.save(doctor);
 		return ResponseEntity.ok().body(update);
 	}
-	
+	//update patient by id
 	@PutMapping("/update/patients")
 	public ResponseEntity<Patient> updatePatient(@PathVariable(value = "id") Long pntid, @Valid @RequestBody Patient pnt){
 		Patient patient = patientDao.findOne(pntid);
@@ -102,7 +103,7 @@ public class APIcontroller {
 		Patient update = patientDao.save(patient);
 		return ResponseEntity.ok().body(update);
 	}
-	
+	// delete doctor by id
 	@DeleteMapping("/delete/doctors")
 	public ResponseEntity<Doctor> deleteDoctor(@PathVariable(value ="id") Long docid){
 		Doctor doc = doctorDao.findOne(docid);
@@ -113,7 +114,7 @@ public class APIcontroller {
 		doctorDao.delete(doc);
 		return ResponseEntity.ok().build();
 	}
-	
+	// delete patient by id
 	@DeleteMapping("/delete/patients")
 	public ResponseEntity<Patient> deletePatient(@PathVariable(value ="id") Long pntid){
 		Patient pnt = patientDao.findOne(pntid);
